@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Northstar",
+    "slug": "northstar-pms",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "northstar",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "android": {
+      "package": "com.example.northstar",
+      "edgeToEdgeEnabled": true,
+      "softwareKeyboardLayoutMode": "pan"
+    },
+    "ios": {
+      "bundleIdentifier": "com.example.northstar",
+      "supportsTablet": false
+    },
+    "plugins": ["expo-secure-store"],
+    "extra": {
+      "comment": "The API base URL comes from EXPO_PUBLIC_API_URL, not from here."
+    }
+  }
+}

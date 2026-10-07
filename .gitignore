@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment files (examples are committed, real values are not)
+.env
+.env.local
+.env.production
+
+# Expo
+.expo/
+.expo-shared/
+android/
+ios/
+*.apk
+*.aab
+
+# Local database used by the optional embedded-Postgres dev script
+backend/.devdb/
+backend/.devtools/
+.pglite-data/
+
+# Archived earlier attempt, kept out of the build
+_legacy/
+
+# Logs and OS noise
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Test output
+coverage/
