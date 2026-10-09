@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: proshu-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npm run migrate
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: DATABASE_URL
+        sync: false # Must be provided in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true # Render will generate a strong secret automatically
+      - key: CORS_ORIGINS
+        sync: false # Must be set to your Vercel URL
