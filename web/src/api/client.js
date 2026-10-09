@@ -1,4 +1,4 @@
-const BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+const BASE_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 
 // localStorage is readable by any script on this origin. That is an accepted
 // trade-off for this build; README ("Design decisions") covers the httpOnly
