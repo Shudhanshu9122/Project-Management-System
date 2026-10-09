@@ -102,6 +102,12 @@
   font-weight: 500;
   white-space: nowrap;
   transition: background var(--transition), color var(--transition);
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .nav-link:hover {
