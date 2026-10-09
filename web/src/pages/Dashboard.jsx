@@ -54,12 +54,21 @@ export function Dashboard() {
   const [forms, setForms] = useState({ task: false, project: false });
 
   async function patchTask(task, changes) {
+    const previousFocusData = focus.data;
+    if (focus.data) {
+      focus.setData({
+        ...focus.data,
+        data: focus.data.data.map((t) => (t.id === task.id ? { ...t, ...changes } : t)),
+      });
+    }
+
     try {
       await api.put(`/tasks/${task.id}`, changes);
       focus.reload();
       stats.reload();
       recent.reload();
     } catch (error) {
+      if (previousFocusData) focus.setData(previousFocusData);
       toast.error('Could not update the task', error.message);
     }
   }
@@ -81,8 +90,9 @@ export function Dashboard() {
 
   const loading = stats.loading || focus.loading || recent.loading;
   const failed = stats.error || focus.error || recent.error;
+  const isInitialLoad = !stats.data || !focus.data || !recent.data;
 
-  if (loading) {
+  if (loading && isInitialLoad) {
     return (
       <div className="page">
         <div className="stat-strip">

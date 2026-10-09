@@ -44,7 +44,7 @@ export function ProjectDetail() {
   const [pendingTaskDelete, setPendingTaskDelete] = useState(null);
   const [pendingProjectDelete, setPendingProjectDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [busyTaskId, setBusyTaskId] = useState(null);
+
 
   const debouncedSearch = useDebounce(search, 300);
 
@@ -69,15 +69,21 @@ export function ProjectDetail() {
   );
 
   async function patchTask(task, changes) {
-    setBusyTaskId(task.id);
+    const previousTasksData = tasks.data;
+    if (tasks.data) {
+      tasks.setData({
+        ...tasks.data,
+        data: tasks.data.data.map((t) => (t.id === task.id ? { ...t, ...changes } : t)),
+      });
+    }
+
     try {
       await api.put(`/tasks/${task.id}`, changes);
       tasks.reload();
       project.reload();
     } catch (error) {
+      if (previousTasksData) tasks.setData(previousTasksData);
       toast.error('Could not update the task', error.message);
-    } finally {
-      setBusyTaskId(null);
     }
   }
 
@@ -108,7 +114,7 @@ export function ProjectDetail() {
     }
   }
 
-  if (project.loading) return <PageSpinner label="Loading project" />;
+  if (project.loading && !project.data) return <PageSpinner label="Loading project" />;
 
   if (project.error) {
     const notFound = project.error.status === 404;
@@ -234,7 +240,7 @@ export function ProjectDetail() {
         loading={tasks.loading}
         error={tasks.error}
         onRetry={tasks.reload}
-        busyTaskId={busyTaskId}
+
         emptyTitle={search || status || priority ? 'No tasks match those filters' : 'No tasks in this project'}
         emptyText={
           search || status || priority

@@ -25,7 +25,7 @@ export function Tasks() {
   const [editing, setEditing] = useState(null);
   const [pendingDelete, setPendingDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
-  const [busyTaskId, setBusyTaskId] = useState(null);
+
 
   const toast = useToast();
   const debouncedSearch = useDebounce(search, 300);
@@ -35,7 +35,7 @@ export function Tasks() {
   }, [debouncedSearch, status, priority, sort]);
 
   const query = buildQuery({ search: debouncedSearch, status, priority, sort, page, limit: PAGE_SIZE });
-  const { data, loading, error, reload } = useFetch(
+  const { data, loading, error, reload, setData } = useFetch(
     (signal) => api.get(`/tasks${query}`, { signal }),
     [debouncedSearch, status, priority, sort, page]
   );
@@ -44,14 +44,21 @@ export function Tasks() {
   const projects = useFetch((signal) => api.get('/projects?limit=100&sort=name', { signal }), []);
 
   async function patchTask(task, changes) {
-    setBusyTaskId(task.id);
+    // Optimistic update
+    const previousData = data;
+    if (data) {
+      setData({
+        ...data,
+        data: data.data.map((t) => (t.id === task.id ? { ...t, ...changes } : t)),
+      });
+    }
+
     try {
       await api.put(`/tasks/${task.id}`, changes);
-      reload();
+      reload(); // Sync with server in the background
     } catch (patchError) {
+      if (previousData) setData(previousData); // Rollback on error
       toast.error('Could not update the task', patchError.message);
-    } finally {
-      setBusyTaskId(null);
     }
   }
 
@@ -136,7 +143,7 @@ export function Tasks() {
         error={error}
         onRetry={reload}
         showProject
-        busyTaskId={busyTaskId}
+
         emptyTitle={search || status || priority ? 'No tasks match those filters' : 'No tasks yet'}
         emptyText={
           search || status || priority

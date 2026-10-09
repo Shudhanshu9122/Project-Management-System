@@ -13,8 +13,6 @@ const { asyncHandler } = require('./utils/helpers');
 
 const app = express();
 
-// Only meaningful when the service really sits behind a proxy; TRUST_PROXY keeps
-// that decision with the operator instead of trusting X-Forwarded-For blindly.
 app.set('trust proxy', env.trustProxy);
 app.disable('x-powered-by');
 
@@ -23,9 +21,6 @@ app.use(helmet());
 app.use(
   cors({
     origin(origin, callback) {
-      // Native apps and server-to-server calls send no Origin, and there is no
-      // browser policy to enforce for them - the JWT is the real boundary.
-      // An unknown origin simply gets no CORS headers and the browser blocks it.
       if (!origin || env.corsOrigins.includes(origin)) {
         callback(null, true);
         return;
@@ -35,7 +30,6 @@ app.use(
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    // Token based API: no cookies, so no cross-site credential sharing.
     credentials: false,
     maxAge: 600,
   })
@@ -50,8 +44,6 @@ app.use(
   })
 );
 
-// Registered before the limiter: a container probe should never be throttled,
-// and a failing probe should say so instead of returning a stack trace.
 app.get(
   '/health',
   asyncHandler(async (_req, res) => {

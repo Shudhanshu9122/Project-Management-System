@@ -117,7 +117,7 @@ export function Projects() {
         </select>
       </div>
 
-      {loading ? (
+      {loading && projects.length === 0 ? (
         <div className="grid grid--projects">
           {Array.from({ length: 6 }, (_, index) => (
             <ProjectCardSkeleton key={index} />

@@ -20,7 +20,7 @@ export function TaskListSection({
   onStatusChange,
   onPriorityChange,
 }) {
-  if (loading) return <ListSkeleton rows={4} />;
+  if (loading && tasks.length === 0) return <ListSkeleton rows={4} />;
 
   if (error) {
     return (
