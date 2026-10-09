@@ -34,7 +34,7 @@ export function validateLoginForm({ email, password }) {
   return errors;
 }
 
-export function validateRegisterForm({ fullName, email, password }) {
+export function validateRegisterForm({ fullName, email, password, confirmPassword }) {
   const errors = {};
 
   errors.fullName = required(fullName, 'Full name');
@@ -51,7 +51,10 @@ export function validateRegisterForm({ fullName, email, password }) {
   else if (!/[A-Za-z]/.test(password)) errors.password = 'Password must contain at least one letter.';
   else if (!/\d/.test(password)) errors.password = 'Password must contain at least one number.';
 
-  return errors;
+  if (!confirmPassword) errors.confirmPassword = 'Please confirm your password.';
+  else if (password !== confirmPassword) errors.confirmPassword = 'Passwords do not match.';
+
+  return compact(errors);
 }
 
 export function validateProjectForm({ name, description, startDate, endDate }) {

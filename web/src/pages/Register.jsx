@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { AlertTriangle, CheckCircle2, Eye, EyeOff } from 'lucide-react';
+import { AlertTriangle, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { FormField } from '../components/FormField';
@@ -19,7 +19,7 @@ export function Register() {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const [values, setValues] = useState({ fullName: '', email: '', password: '' });
+  const [values, setValues] = useState({ fullName: '', email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState({});
   const [formError, setFormError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -66,26 +66,40 @@ export function Register() {
   return (
     <div className="auth">
       <section className="auth__brand">
-        <div className="auth__brand-inner">
-          <h1 className="auth__headline">Start with Northstar</h1>
-          <p className="auth__lede">
-            One place for the projects you own and the tasks that move them forward.
-          </p>
+        <div className="auth__brand-top">
+          <span className="sidebar__logo" aria-hidden="true">
+            P
+          </span>
+          <span className="sidebar__wordmark">Proshu</span>
         </div>
 
-        <ul className="auth__points">
-          {HIGHLIGHTS.map((point) => (
-            <li key={point}>
-              <CheckCircle2 size={18} aria-hidden="true" />
-              {point}
-            </li>
-          ))}
-        </ul>
+        <div className="auth__brand-inner">
+          <p className="auth__eyebrow">Project management</p>
+          <h1 className="auth__headline">
+            Plan the work, track the tasks, and know where every project stands.
+          </h1>
+          <p className="auth__lede">
+            Projects, tasks and progress in one workspace - on the web and on Android.
+          </p>
+
+          <ul className="auth__points">
+            {HIGHLIGHTS.map((point, index) => (
+              <li key={point}>
+                <span className="auth__point-index">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className="auth__brand-foot">Free to use, no card required.</p>
       </section>
 
       <section className="auth__panel">
         <div className="auth__card">
-          <h2 className="auth__title">Create your account</h2>
+          <h1 className="auth__title">Create your account</h1>
           <p className="auth__subtitle">Free, and the same login works on the Android app.</p>
 
           {formError ? (
@@ -153,6 +167,26 @@ export function Register() {
                     {showPassword ? <EyeOff size={17} aria-hidden="true" /> : <Eye size={17} aria-hidden="true" />}
                   </button>
                 </div>
+              )}
+            </FormField>
+
+            <FormField
+              id="register-confirm-password"
+              label="Confirm Password"
+              required
+              error={errors.confirmPassword}
+            >
+              {(props) => (
+                <input
+                  {...props}
+                  type={showPassword ? 'text' : 'password'}
+                  name="confirm-password"
+                  autoComplete="new-password"
+                  className={`input ${errors.confirmPassword ? 'input--invalid' : ''}`}
+                  value={values.confirmPassword}
+                  onChange={(event) => setField('confirmPassword', event.target.value)}
+                  placeholder="Confirm your password"
+                />
               )}
             </FormField>
 

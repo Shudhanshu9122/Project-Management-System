@@ -203,7 +203,7 @@ Two devices, one account. Plan for 4:30 and leave slack.
 | --- | --- | --- |
 | 0:00 - 0:20 | One sentence on what the project is: a project and task manager, one backend, web plus Android | Sets the frame |
 | 0:20 - 0:40 | `curl https://<api>/health` in a terminal | Shows the deployed API is real and healthy |
-| 0:40 - 1:10 | Log in on the web with `demo@example.com` / `Password123`. Land on the dashboard | Same account as mobile, coming up |
+| 0:40 - 1:10 | Log in on the web with `shudhanshu@example.com` / `Password123`. Land on the dashboard | Same account as mobile, coming up |
 | 1:10 - 1:35 | Point at the six stat cards and the donut, then open **Projects** and search for `redesign` | Search, filters and the fact that the numbers come from the API |
 | 1:35 - 1:55 | Toggle the theme, then narrow the window to show the sidebar collapsing into a drawer | The responsive and themed requirement, in ten seconds |
 | 1:55 - 2:35 | Open **Website Redesign**, click **Add task**, create "Demo sync task" with a due date, save | The write path, a modal form and validation |

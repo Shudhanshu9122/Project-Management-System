@@ -440,7 +440,7 @@ project-management-system/
 Created by `npm run seed` in `backend`. This is generated test data, not a real person.
 
 ```
-email:    demo@example.com
+email:    shudhanshu@example.com
 password: Password123
 ```
 

@@ -3,7 +3,7 @@ const db = require('../config/db');
 const env = require('../config/env');
 const logger = require('../config/logger');
 
-const DEMO_EMAIL = 'demo@example.com';
+const DEMO_EMAIL = 'shudhanshu@example.com';
 const DEMO_PASSWORD = 'Password123';
 
 // Test data only. Re-running replaces the demo account's rows rather than
@@ -71,7 +71,7 @@ async function main() {
       `INSERT INTO users (full_name, email, password_hash)
        VALUES ($1, $2, $3)
        RETURNING id`,
-      ['Demo User', DEMO_EMAIL, passwordHash]
+      ['Shudhanshu', DEMO_EMAIL, passwordHash]
     );
     const ownerId = userRows[0].id;
 

@@ -1,19 +1,19 @@
 {
   "expo": {
-    "name": "Northstar",
-    "slug": "northstar-pms",
+    "name": "PROSHU",
+    "slug": "proshu-pms",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "northstar",
+    "scheme": "proshu",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "android": {
-      "package": "com.example.northstar",
+      "package": "com.example.proshu",
       "edgeToEdgeEnabled": true,
       "softwareKeyboardLayoutMode": "pan"
     },
     "ios": {
-      "bundleIdentifier": "com.example.northstar",
+      "bundleIdentifier": "com.example.proshu",
       "supportsTablet": false
     },
     "plugins": ["expo-secure-store"],

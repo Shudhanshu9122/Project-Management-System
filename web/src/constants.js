@@ -40,8 +40,9 @@ export const PRIORITY_VARIANT = {
   High: 'danger',
 };
 
+// Mid-tone values chosen to stay legible on both the light and dark surface.
 export const CHART_COLORS = {
-  Pending: '#f59e0b',
-  'In Progress': '#6366f1',
-  Completed: '#10b981',
+  Pending: '#d0a13a',
+  'In Progress': '#5b7fe0',
+  Completed: '#2f9e63',
 };

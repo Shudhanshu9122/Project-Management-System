@@ -149,7 +149,7 @@ export function ProjectDetail() {
             <ArrowLeft size={15} aria-hidden="true" />
             All projects
           </Link>
-          <h2 className="page__title">{data.name}</h2>
+          <h1 className="page__title">{data.name}</h1>
           <div className="row" style={{ marginTop: 8 }}>
             <ProjectStatusBadge status={data.status} />
             <span className="muted row" style={{ gap: 6 }}>

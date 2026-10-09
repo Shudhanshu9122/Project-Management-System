@@ -48,10 +48,12 @@ export function UserMenu() {
             width: 28,
             height: 28,
             borderRadius: '50%',
-            background: 'var(--brand-gradient)',
-            color: '#fff',
-            fontSize: 11,
-            fontWeight: 700,
+            background: 'var(--ink)',
+            color: 'var(--ink-on-ink)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10.5,
+            fontWeight: 500,
+            letterSpacing: '0.04em',
           }}
           aria-hidden="true"
         >

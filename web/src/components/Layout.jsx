@@ -5,14 +5,14 @@ import { Sidebar } from './Sidebar';
 import { UserMenu } from './UserMenu';
 import { ToastHost } from './Toast';
 
-const COLLAPSE_KEY = 'northstar.sidebar-collapsed';
+const COLLAPSE_KEY = 'proshu.sidebar-collapsed';
 
 function titleFor(pathname) {
   if (pathname === '/') return 'Dashboard';
   if (pathname.startsWith('/projects/')) return 'Project details';
   if (pathname.startsWith('/projects')) return 'Projects';
   if (pathname.startsWith('/tasks')) return 'My tasks';
-  return 'Northstar';
+  return 'PROSHU';
 }
 
 export function Layout() {
@@ -62,7 +62,8 @@ export function Layout() {
             <Menu size={20} aria-hidden="true" />
           </button>
 
-          <h1 className="topbar__title">{titleFor(location.pathname)}</h1>
+          {/* Location chrome, not the page heading: each page owns its own h1. */}
+          <span className="topbar__title">{titleFor(location.pathname)}</span>
           <UserMenu />
         </header>
 

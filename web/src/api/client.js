@@ -1,9 +1,9 @@
-const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:4000/api').replace(/\/$/, '');
+const BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 
 // localStorage is readable by any script on this origin. That is an accepted
 // trade-off for this build; README ("Design decisions") covers the httpOnly
 // cookie alternative.
-const TOKEN_KEY = 'northstar.token';
+const TOKEN_KEY = 'proshu.token';
 
 // Codes the API uses when the session is gone for good. Anything else (for
 // example 403 or 500) is a normal error the page should show in place.

@@ -1,16 +1,16 @@
-# Submission checklist
+# ✅ PROSHU Submission Checklist
 
-Everything the assignment asks for, and where to find it. Items marked **[fill in]** are placeholders
+Everything the assignment asks for, and where to find it. Items marked **[fill in]** are placeholders that only you can provide.
 that only you can provide.
 
 ## Links
 
 | Item | Where |
 | --- | --- |
-| Public GitHub repository | **[fill in]** `https://github.com/<your-username>/project-management-system` |
-| Deployed web app | **[fill in]** e.g. `https://northstar-pms.vercel.app` |
+| Public GitHub repository | **[fill in]** `https://github.com/Shudhanshu9122/project-management-system` |
+| Deployed web app | **[fill in]** e.g. `https://proshu-pms.vercel.app` |
 | Deployed backend API | **[fill in]** e.g. `https://pms-api.onrender.com` (health: `/health`) |
-| Android APK / EAS build link | **[fill in]** e.g. `https://expo.dev/accounts/<user>/projects/northstar-pms/builds/<id>` |
+| Android APK / EAS build link | **[fill in]** e.g. `https://expo.dev/accounts/<user>/projects/proshu-pms/builds/<id>` |
 | Demo video (5 minutes) | **[fill in]** e.g. `https://youtu.be/<id>` - script in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md#5-five-minute-demo-video-checklist) |
 
 ## Deliverables
@@ -30,7 +30,7 @@ that only you can provide.
 | Requirement | Status | Location |
 | --- | --- | --- |
 | Node.js + Express 4, CommonJS | Done | [backend/package.json](backend/package.json), [backend/src/app.js](backend/src/app.js) |
-| PostgreSQL through `pg`, parameterized only | Done | [backend/src/config/db.js](backend/src/config/db.js), all controllers |
+| MySQL through `mysql2`, parameterized only | Done | [backend/src/config/db.js](backend/src/config/db.js), all controllers |
 | zod validation on body, query and params | Done | [validators/schemas.js](backend/src/validators/schemas.js), [middleware/validate.js](backend/src/middleware/validate.js) |
 | JWT HS256 in `Authorization: Bearer` | Done | [utils/token.js](backend/src/utils/token.js), [middleware/auth.js](backend/src/middleware/auth.js) |
 | bcrypt password hashing | Done | [controllers/auth.controller.js](backend/src/controllers/auth.controller.js) |
@@ -48,13 +48,13 @@ that only you can provide.
 | Requirement | Status | Location |
 | --- | --- | --- |
 | `users`, `projects`, `tasks`, `revoked_tokens` | Done | [backend/db/schema.sql](backend/db/schema.sql) |
-| UUID primary keys from `gen_random_uuid()` | Done | same |
+| UUID primary keys from `randomUUID()` | Done | same |
 | Foreign keys with `ON DELETE CASCADE` | Done | same |
 | `CHECK` constraints on status, priority and dates | Done | same, listed in [ER_DIAGRAM.md](docs/ER_DIAGRAM.md#constraints) |
-| Case-insensitive unique index on `lower(email)` | Done | same |
+| Case-insensitive unique index on `email` | Done | same |
 | Indexes on `owner_id`, `(owner_id, status)`, `project_id`, `(project_id, status)` | Done | same |
 | Idempotent schema | Done | same, `IF NOT EXISTS` throughout |
-| `DATE` columns returned as `YYYY-MM-DD` strings | Done | [config/db.js](backend/src/config/db.js) type parser for OID 1082 |
+| `DATE` columns returned as `YYYY-MM-DD` strings | Done | [config/db.js](backend/src/config/db.js) type parser for `dateStrings: true` |
 
 ## Web requirements
 

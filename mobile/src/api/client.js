@@ -2,9 +2,9 @@ import * as SecureStore from 'expo-secure-store';
 
 // EXPO_PUBLIC_* values are inlined by Metro at bundle time.
 // Android emulator: http://10.0.2.2:4000/api. Physical device: your LAN IP.
-const BASE_URL = (process.env.EXPO_PUBLIC_API_URL || 'http://10.0.2.2:4000/api').replace(/\/$/, '');
+const BASE_URL = (process.env.EXPO_PUBLIC_API_URL || '').replace(/\/$/, '');
 
-const TOKEN_KEY = 'northstar.token';
+const TOKEN_KEY = 'proshu.token';
 
 // SecureStore is backed by the Android Keystore / iOS Keychain. AsyncStorage is
 // deliberately not used here: it is world readable on a rooted device.

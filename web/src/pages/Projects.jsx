@@ -74,7 +74,7 @@ export function Projects() {
     <div className="page">
       <div className="page__header">
         <div className="page__heading">
-          <h2 className="page__title">Projects</h2>
+          <h1 className="page__title">Projects</h1>
           <p className="page__subtitle">Everything you own, with task progress for each one.</p>
         </div>
 

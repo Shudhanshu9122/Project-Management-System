@@ -64,7 +64,7 @@ export function LoginScreen({ navigation }) {
           <Text style={styles.logoText}>N</Text>
         </View>
 
-        <Text style={[styles.title, { color: theme.text }]}>Northstar</Text>
+        <Text style={[styles.title, { color: theme.text }]}>PROSHU</Text>
         <Text style={[styles.subtitle, { color: theme.textMuted }]}>
           Sign in with the same account you use on the web.
         </Text>

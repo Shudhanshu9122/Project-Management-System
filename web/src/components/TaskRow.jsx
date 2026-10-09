@@ -2,9 +2,20 @@ import { Check, Pencil, Trash2 } from 'lucide-react';
 import { TASK_PRIORITIES, TASK_STATUSES } from '../constants';
 import { PriorityBadge, TaskStatusBadge } from './Badge';
 
+function dueMeta(task, isComplete, isOverdue) {
+  if (!task.dueDate) return <span>No due date</span>;
+  return (
+    <span className={isOverdue ? 'overdue' : undefined}>
+      {isOverdue ? 'Overdue: ' : 'Due '}
+      {task.dueDate}
+    </span>
+  );
+}
+
 export function TaskRow({
   task,
   showProject = false,
+  compact = false,
   busy = false,
   onToggleComplete,
   onEdit,
@@ -16,45 +27,69 @@ export function TaskRow({
   const isOverdue =
     Boolean(task.dueDate) && !isComplete && new Date(`${task.dueDate}T00:00:00`) < new Date(new Date().toDateString());
 
+  const checkbox = (
+    <button
+      type="button"
+      className={`task-row__check ${isComplete ? 'task-row__check--done' : ''}`}
+      onClick={() => onToggleComplete(task)}
+      disabled={busy}
+      aria-pressed={isComplete}
+      aria-label={isComplete ? `Mark ${task.name} as pending` : `Mark ${task.name} as completed`}
+    >
+      <span
+        style={{
+          display: 'grid',
+          placeItems: 'center',
+          width: 19,
+          height: 19,
+          borderRadius: 5,
+          border: `1.5px solid ${isComplete ? 'var(--green-600)' : 'var(--border-strong)'}`,
+          background: isComplete ? 'var(--green-600)' : 'transparent',
+          color: '#fff',
+        }}
+      >
+        {isComplete ? <Check size={12} aria-hidden="true" /> : null}
+      </span>
+    </button>
+  );
+
+  // Compact rows (dashboard "Today's focus") are read-only apart from the
+  // checkbox: editing, deleting and the inline selects live on the Tasks page.
+  if (compact) {
+    return (
+      <div className="task-row">
+        {checkbox}
+
+        <div className="task-row__main" style={{ cursor: 'default' }}>
+          <span className={`task-row__name ${isComplete ? 'task-row__name--done' : ''}`}>
+            {task.name}
+          </span>
+          <span className="task-row__meta">
+            {showProject && task.projectName ? <span>{task.projectName}</span> : null}
+            {showProject && task.projectName ? <span aria-hidden="true">·</span> : null}
+            <span>{task.status}</span>
+            <span aria-hidden="true">·</span>
+            {dueMeta(task, isComplete, isOverdue)}
+          </span>
+        </div>
+
+        <div className="task-row__badges">
+          <PriorityBadge priority={task.priority} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="task-row">
-      <button
-        type="button"
-        className={`task-row__check ${isComplete ? 'task-row__check--done' : ''}`}
-        onClick={() => onToggleComplete(task)}
-        disabled={busy}
-        aria-pressed={isComplete}
-        aria-label={isComplete ? `Mark ${task.name} as pending` : `Mark ${task.name} as completed`}
-      >
-        <span
-          style={{
-            display: 'grid',
-            placeItems: 'center',
-            width: 20,
-            height: 20,
-            borderRadius: 6,
-            border: `2px solid ${isComplete ? 'var(--green-600)' : 'var(--border-strong)'}`,
-            background: isComplete ? 'var(--green-600)' : 'transparent',
-            color: '#fff',
-          }}
-        >
-          {isComplete ? <Check size={13} aria-hidden="true" /> : null}
-        </span>
-      </button>
+      {checkbox}
 
       <button type="button" className="task-row__main" onClick={() => onEdit(task)}>
         <span className={`task-row__name ${isComplete ? 'task-row__name--done' : ''}`}>{task.name}</span>
         <span className="task-row__meta">
           {showProject ? <span>{task.projectName}</span> : null}
           {showProject && task.dueDate ? <span aria-hidden="true">·</span> : null}
-          {task.dueDate ? (
-            <span className={isOverdue ? 'overdue' : undefined}>
-              {isOverdue ? 'Overdue: ' : 'Due '}
-              {task.dueDate}
-            </span>
-          ) : (
-            <span>No due date</span>
-          )}
+          {dueMeta(task, isComplete, isOverdue)}
         </span>
       </button>
 
@@ -106,7 +141,7 @@ export function TaskRow({
           onClick={() => onEdit(task)}
           aria-label={`Edit ${task.name}`}
         >
-          <Pencil size={16} aria-hidden="true" />
+          <Pencil size={15} aria-hidden="true" />
         </button>
         <button
           type="button"
@@ -114,7 +149,7 @@ export function TaskRow({
           onClick={() => onDelete(task)}
           aria-label={`Delete ${task.name}`}
         >
-          <Trash2 size={16} aria-hidden="true" />
+          <Trash2 size={15} aria-hidden="true" />
         </button>
       </div>
     </div>

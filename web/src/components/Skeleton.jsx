@@ -10,15 +10,10 @@ export function Skeleton({ width = '100%', height = 12, className = '', style })
 
 export function StatSkeleton() {
   return (
-    <div className="card">
-      <div className="stat">
-        <span className="skeleton" style={{ width: 44, height: 44, borderRadius: 12 }} />
-        <div style={{ flex: 1 }}>
-          <Skeleton className="skeleton--title" />
-          <div style={{ height: 8 }} />
-          <Skeleton width="70%" />
-        </div>
-      </div>
+    <div className="stat">
+      <Skeleton width={64} height={9} />
+      <Skeleton width={40} height={26} />
+      <Skeleton width={80} height={9} />
     </div>
   );
 }
@@ -40,7 +35,7 @@ export function ProjectCardSkeleton() {
 export function TaskRowSkeleton() {
   return (
     <div className="task-row" aria-hidden="true">
-      <Skeleton width={44} height={44} style={{ borderRadius: 12, flex: '0 0 44px' }} />
+      <Skeleton width={34} height={34} style={{ borderRadius: 6, flex: '0 0 34px' }} />
       <div style={{ flex: 1 }}>
         <Skeleton width="45%" />
         <div style={{ height: 8 }} />

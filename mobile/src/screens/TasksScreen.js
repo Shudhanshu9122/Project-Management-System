@@ -4,6 +4,7 @@ import { api, buildQuery } from '../api/client';
 import { useResource } from '../api/useResource';
 import { useNetworkStatus } from '../api/network';
 import { readCachedTasks, rememberTasks } from '../api/offlineCache';
+import { enqueueEdit, replayQueue } from '../api/offlineQueue';
 import { useAppTheme } from '../theme';
 import { Button, FilterChips, SearchBar } from '../components/Controls';
 import { EmptyState, ErrorState, ListSkeleton, OfflineBanner } from '../components/States';
@@ -32,12 +33,24 @@ export function TasksScreen({ navigation }) {
   const cached = !tasks.data && tasks.error ? readCachedTasks() : null;
   const rows = tasks.data ? tasks.data.data : cached ? cached.tasks : [];
 
+  useEffect(() => {
+    if (isOnline) {
+      replayQueue().then((replayed) => {
+        if (replayed) tasks.reload();
+      });
+    }
+  }, [isOnline]);
+
   async function patchTask(task, changes) {
     try {
       await api.put(`/tasks/${task.id}`, changes);
       tasks.reload();
     } catch (error) {
-      Alert.alert('Could not update the task', error.message);
+      if (error.isOffline) {
+        enqueueEdit(task.id, changes);
+      } else {
+        Alert.alert('Could not update the task', error.message);
+      }
     }
   }
 

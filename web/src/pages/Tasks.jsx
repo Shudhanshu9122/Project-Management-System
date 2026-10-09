@@ -78,7 +78,7 @@ export function Tasks() {
     <div className="page">
       <div className="page__header">
         <div className="page__heading">
-          <h2 className="page__title">My tasks</h2>
+          <h1 className="page__title">My tasks</h1>
           <p className="page__subtitle">Every task across all of your projects.</p>
         </div>
 

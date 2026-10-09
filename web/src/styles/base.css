@@ -28,6 +28,18 @@ p {
   margin: 0;
 }
 
+/* Headings carry the display serif; everything else stays in Inter. */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1.22;
+  color: var(--text);
+}
+
 a {
   color: var(--brand-600);
   text-decoration: none;
@@ -35,6 +47,14 @@ a {
 
 a:hover {
   text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* The one accent colour for inline links: a quiet, ink-adjacent blue that
+   reads as deliberate rather than decorative. */
+.auth__switch a,
+.link {
+  color: var(--blue-600);
 }
 
 button,

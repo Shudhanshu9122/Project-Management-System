@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-const STORAGE_KEY = 'northstar.theme';
+const STORAGE_KEY = 'proshu.theme';
 const ThemeContext = createContext(null);
 
 function resolveInitialTheme() {
