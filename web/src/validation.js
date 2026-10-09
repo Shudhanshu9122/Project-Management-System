@@ -1,6 +1,6 @@
-// Client-side rules mirror backend/src/validators/schemas.js. They exist to give
-// instant feedback; the server remains the authority and its per-field errors
-// are merged on top of these.
+
+
+
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;

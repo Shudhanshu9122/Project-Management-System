@@ -28,7 +28,7 @@ p {
   margin: 0;
 }
 
-/* Headings carry the display serif; everything else stays in Inter. */
+
 h1,
 h2,
 h3,
@@ -50,8 +50,7 @@ a:hover {
   text-underline-offset: 2px;
 }
 
-/* The one accent colour for inline links: a quiet, ink-adjacent blue that
-   reads as deliberate rather than decorative. */
+
 .auth__switch a,
 .link {
   color: var(--blue-600);
@@ -65,7 +64,7 @@ textarea {
   color: inherit;
 }
 
-/* One visible focus style everywhere, only for keyboard users. */
+
 :focus-visible {
   outline: none;
   box-shadow: var(--ring);

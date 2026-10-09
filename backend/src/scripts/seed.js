@@ -6,8 +6,8 @@ const logger = require('../config/logger');
 const DEMO_EMAIL = 'shudhanshu@example.com';
 const DEMO_PASSWORD = 'Password123';
 
-// Test data only. Re-running replaces the demo account's rows rather than
-// appending duplicates.
+
+
 const PROJECTS = [
   {
     name: 'Website Redesign',
@@ -64,7 +64,7 @@ async function main() {
   const passwordHash = await bcrypt.hash(DEMO_PASSWORD, env.bcryptRounds);
 
   const summary = await db.withTransaction(async (client) => {
-    // Cascades remove this account's projects and tasks too.
+    
     await client.query('DELETE FROM users WHERE lower(email) = lower($1)', [DEMO_EMAIL]);
 
     const { rows: userRows } = await client.query(

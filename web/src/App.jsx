@@ -15,7 +15,7 @@ export function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* One guard around the layout, so every nested page is protected. */}
+      {}
       <Route
         element={
           <ProtectedRoute>

@@ -3,8 +3,8 @@ const { AppError } = require('../utils/AppError');
 const { asyncHandler, buildSet, escapeLike, paginationMeta } = require('../utils/helpers');
 const { projectDateOrderMessage } = require('../validators/schemas');
 
-// Qualified with the `p` alias because the list query joins tasks, which also
-// has an `id` column.
+
+
 const PROJECT_COLUMNS = `p.id,
   p.owner_id AS "ownerId",
   p.name,
@@ -22,8 +22,8 @@ const PROJECT_LIST_SORTS = {
   endDate: 'p.end_date',
 };
 
-// The only payload fields an UPDATE may touch, as [requestField, column] pairs.
-// Column names in the generated SQL come from this list, never from the request.
+
+
 const PROJECT_WRITE_COLUMNS = [
   ['name', 'name'],
   ['description', 'description'],
@@ -43,7 +43,7 @@ async function findOwnedProject(projectId, ownerId) {
 const list = asyncHandler(async (req, res) => {
   const { search, status, sort = 'createdAt', order, page, limit } = req.query;
 
-  // Scoping by owner_id is the first condition of every query in this file.
+  
   const conditions = ['p.owner_id = $1'];
   const values = [req.user.id];
 
@@ -125,8 +125,8 @@ const update = asyncHandler(async (req, res) => {
     throw AppError.notFound('project');
   }
 
-  // A partial update can break the ordering rule using a value that is already
-  // stored, which the body schema alone cannot see.
+  
+  
   const startDate = req.body.startDate !== undefined ? req.body.startDate : current.startDate;
   const endDate = req.body.endDate !== undefined ? req.body.endDate : current.endDate;
   if (startDate && endDate && endDate < startDate) {
@@ -169,7 +169,7 @@ const update = asyncHandler(async (req, res) => {
 });
 
 const remove = asyncHandler(async (req, res) => {
-  // Tasks disappear with the project through ON DELETE CASCADE.
+  
   const { rowCount } = await db.query('DELETE FROM projects WHERE id = $1 AND owner_id = $2', [
     req.params.id,
     req.user.id,

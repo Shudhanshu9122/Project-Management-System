@@ -17,8 +17,8 @@ import { ListSkeleton, StatSkeleton } from '../components/Skeleton';
 import { EmptyState, ErrorState } from '../components/States';
 
 const RECENT_PROJECTS = { limit: 5, sort: 'createdAt', order: 'desc' };
-// "Focus" means the highest-priority work first: the CASE-based priority sort
-// orders High, Medium, Low without any null-due-date surprises.
+
+
 const FOCUS_TASKS = { limit: 5, sort: 'priority', order: 'asc' };
 
 const GREETINGS = [
@@ -48,7 +48,7 @@ export function Dashboard() {
     (signal) => api.get(`/projects${buildQuery(RECENT_PROJECTS)}`, { signal }),
     []
   );
-  // The create modals need the full project list to choose from.
+  
   const projects = useFetch((signal) => api.get('/projects?limit=100&sort=name', { signal }), []);
 
   const [forms, setForms] = useState({ task: false, project: false });

@@ -7,8 +7,8 @@ const { schemas } = require('../validators/schemas');
 
 const router = Router();
 
-// The tight limiter only guards the endpoints an attacker would hammer; /me and
-// /logout already need a valid token.
+
+
 router.post('/register', authLimiter, validate(schemas.register), controller.register);
 router.post('/login', authLimiter, validate(schemas.login), controller.login);
 router.post('/logout', requireAuth, controller.logout);

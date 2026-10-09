@@ -53,8 +53,8 @@ export function Register() {
       toast.success('Account created', `Signed in as ${account.fullName}`);
       navigate('/', { replace: true });
     } catch (error) {
-      // The server's per-field errors (for example a duplicate email) take
-      // priority over a generic banner.
+      
+      
       const fields = error instanceof ApiError ? error.fieldErrors() : {};
       if (Object.keys(fields).length > 0) setErrors(fields);
       else setFormError(error.message || 'Could not create the account.');

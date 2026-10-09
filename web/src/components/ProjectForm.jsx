@@ -26,8 +26,8 @@ export function ProjectForm({ open, project, onClose, onSaved }) {
   const toast = useToast();
   const isEdit = Boolean(project);
 
-  // Re-seed the fields every time the dialog opens so a cancelled edit does not
-  // bleed into the next one.
+  
+  
   useEffect(() => {
     if (!open) return;
 

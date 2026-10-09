@@ -1,5 +1,5 @@
 export function ProgressBar({ completed = 0, total = 0, showLabel = true }) {
-  // A project with no tasks is 0% complete rather than 100%.
+  
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (

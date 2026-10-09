@@ -18,7 +18,7 @@ export function UserMenu() {
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
 
-  // Any click outside the panel closes it, which is what a menu should do.
+  
   useEffect(() => {
     if (!open) return undefined;
 

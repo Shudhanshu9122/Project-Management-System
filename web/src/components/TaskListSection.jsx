@@ -3,7 +3,7 @@ import { TaskRow } from './TaskRow';
 import { ListSkeleton } from './Skeleton';
 import { EmptyState, ErrorState } from './States';
 
-/** Shared by the project detail page and the all-tasks page. */
+
 export function TaskListSection({
   tasks,
   loading,

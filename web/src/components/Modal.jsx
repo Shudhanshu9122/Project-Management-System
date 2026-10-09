@@ -2,10 +2,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 
-/**
- * Rendered into document.body so it is never clipped by a scrolling ancestor.
- * Escape closes it, the backdrop closes it, and focus moves inside on open.
- */
+
 export function Modal({ open, title, onClose, children, footer, size = 'md' }) {
   const dialogRef = useRef(null);
 
@@ -17,7 +14,7 @@ export function Modal({ open, title, onClose, children, footer, size = 'md' }) {
     }
 
     const previousOverflow = document.body.style.overflow;
-    // The page behind the dialog must not scroll while it is open.
+    
     document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', handleKeyDown);
 

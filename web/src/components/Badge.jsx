@@ -14,7 +14,7 @@ export function TaskStatusBadge({ status }) {
   return <Badge variant={TASK_STATUS_VARIANT[status] || 'neutral'}>{status}</Badge>;
 }
 
-// The CSS uppercases it, so this renders as "HIGH" - a label, not a pill sentence.
+
 export function PriorityBadge({ priority }) {
   return <Badge variant={PRIORITY_VARIANT[priority] || 'neutral'}>{priority}</Badge>;
 }

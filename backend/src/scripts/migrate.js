@@ -8,7 +8,7 @@ const SCHEMA_PATH = path.resolve(__dirname, '../../db/schema.sql');
 async function main() {
   const sql = await fs.readFile(SCHEMA_PATH, 'utf8');
 
-  // schema.sql is idempotent, so applying it repeatedly is the migration.
+  
   await db.query(sql);
 
   logger.info(`Schema applied from ${path.relative(process.cwd(), SCHEMA_PATH)}`);

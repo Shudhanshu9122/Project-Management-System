@@ -1,12 +1,12 @@
 const BASE_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 
-// localStorage is readable by any script on this origin. That is an accepted
-// trade-off for this build; README ("Design decisions") covers the httpOnly
-// cookie alternative.
+
+
+
 const TOKEN_KEY = 'proshu.token';
 
-// Codes the API uses when the session is gone for good. Anything else (for
-// example 403 or 500) is a normal error the page should show in place.
+
+
 const SESSION_CODES = new Set(['TOKEN_EXPIRED', 'INVALID_TOKEN', 'TOKEN_REVOKED']);
 
 export class ApiError extends Error {
@@ -18,7 +18,7 @@ export class ApiError extends Error {
     this.details = details || [];
   }
 
-  /** Maps backend field errors onto a { field: message } object for forms. */
+  
   fieldErrors() {
     return this.details.reduce((accumulator, detail) => {
       if (detail.field && !accumulator[detail.field]) {
@@ -43,7 +43,7 @@ export function clearToken() {
 
 let unauthorizedHandler = null;
 
-/** Called by AuthContext so a dead session can clear app state and redirect. */
+
 export function setUnauthorizedHandler(handler) {
   unauthorizedHandler = handler;
 }
@@ -52,8 +52,8 @@ export function buildQuery(params) {
   const search = new URLSearchParams();
 
   for (const [key, value] of Object.entries(params)) {
-    // Empty strings mean "filter not applied", which the API also treats as
-    // unset; sending them would only make URLs harder to read.
+    
+    
     if (value === undefined || value === null || value === '') continue;
     search.set(key, String(value));
   }
@@ -78,7 +78,7 @@ async function request(path, { method = 'GET', body, signal } = {}) {
       signal,
     });
   } catch (error) {
-    // An aborted request is a navigation, not a failure to report.
+    
     if (error.name === 'AbortError') throw error;
     throw new ApiError(0, 'NETWORK_ERROR', 'Cannot reach the server. Check your connection and try again.');
   }

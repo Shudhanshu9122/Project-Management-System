@@ -1,8 +1,8 @@
 const db = require('../config/db');
 const { asyncHandler } = require('../utils/helpers');
 
-// One round trip for all six numbers. Every subquery reads from the same
-// owner-scoped CTE, so the counts cannot disagree with each other.
+
+
 const STATS_SQL = `
   WITH owned_projects AS (
     SELECT id, status FROM projects WHERE owner_id = $1

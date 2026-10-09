@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 const env = require('../config/env');
 const { AppError } = require('./AppError');
 
-// The jti is what makes logout real: the signature stays valid until expiry, so
-// a server-side revocation list keyed by jti is the only way to kill it early.
+
+
 function signToken(userId) {
   const jti = randomUUID();
   const token = jwt.sign({ jti }, env.jwtSecret, {

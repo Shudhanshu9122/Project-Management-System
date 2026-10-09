@@ -5,13 +5,13 @@ const { AppError } = require('../utils/AppError');
 const { asyncHandler } = require('../utils/helpers');
 const { signToken } = require('../utils/token');
 
-// password_hash is absent from every projection in this file, so it cannot be
-// returned by accident when a new endpoint is added.
+
+
 const USER_COLUMNS = 'id, full_name AS "fullName", email, created_at AS "createdAt"';
 
-// Comparing against a real hash when the account does not exist keeps the
-// response time of "unknown email" and "wrong password" close enough that the
-// difference cannot be used to enumerate accounts.
+
+
+
 const DUMMY_HASH = bcrypt.hashSync('password-that-never-matches', env.bcryptRounds);
 
 const register = asyncHandler(async (req, res) => {
@@ -51,8 +51,8 @@ const login = asyncHandler(async (req, res) => {
   const account = rows[0];
   const passwordMatches = await bcrypt.compare(password, account ? account.passwordHash : DUMMY_HASH);
 
-  // One message for both failures: which half was wrong is not the client's
-  // business, and saying so would confirm that an email is registered.
+  
+  
   if (!account || !passwordMatches) {
     throw AppError.unauthorized('INVALID_CREDENTIALS', 'Invalid email or password.');
   }

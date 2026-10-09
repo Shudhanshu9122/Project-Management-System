@@ -14,8 +14,8 @@ export function AuthProvider({ children }) {
   const [restoring, setRestoring] = useState(true);
   const [sessionMessage, setSessionMessage] = useState(null);
 
-  // The API client cannot redirect on its own; it asks the app to drop the
-  // session and the login page shows why.
+  
+  
   useEffect(() => {
     setUnauthorizedHandler((code) => {
       setUser(null);
@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
     return () => setUnauthorizedHandler(null);
   }, []);
 
-  // A stored token is only trusted after the server confirms it.
+  
   useEffect(() => {
     if (!getToken()) {
       setRestoring(false);
@@ -69,10 +69,10 @@ export function AuthProvider({ children }) {
 
   const logout = useCallback(async () => {
     try {
-      // Best effort: the local session is cleared even if the server is down.
+      
       await api.post('/auth/logout');
     } catch {
-      // Ignored on purpose - the token is discarded below either way.
+      
     }
     clearToken();
     setUser(null);

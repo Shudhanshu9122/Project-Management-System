@@ -53,8 +53,8 @@ export function TaskRow({
     </button>
   );
 
-  // Compact rows (dashboard "Today's focus") are read-only apart from the
-  // checkbox: editing, deleting and the inline selects live on the Tasks page.
+  
+  
   if (compact) {
     return (
       <div className="task-row">

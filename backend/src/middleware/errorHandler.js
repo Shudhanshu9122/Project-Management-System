@@ -1,7 +1,7 @@
 const logger = require('../config/logger');
 const { AppError } = require('../utils/AppError');
 
-// Postgres error codes we translate instead of leaking a driver message.
+
 const POSTGRES_CODES = {
   23505: { statusCode: 409, code: 'DUPLICATE_RESOURCE', message: 'A record with these details already exists.' },
   23503: { statusCode: 409, code: 'REFERENCE_VIOLATION', message: 'The referenced record does not exist.' },
@@ -12,7 +12,7 @@ const POSTGRES_CODES = {
 function mapError(error) {
   if (error instanceof AppError) return error;
 
-  // Raised by express.json() for a malformed body.
+  
   if (error.type === 'entity.parse.failed') {
     return AppError.badRequest('INVALID_JSON', 'Request body is not valid JSON.');
   }
@@ -26,7 +26,7 @@ function mapError(error) {
   return new AppError(500, 'INTERNAL_ERROR', 'Something went wrong. Please try again later.');
 }
 
-// eslint-disable-next-line no-unused-vars -- Express identifies error middleware by arity
+
 function errorHandler(error, req, res, next) {
   if (res.headersSent) {
     next(error);
@@ -36,8 +36,8 @@ function errorHandler(error, req, res, next) {
   const mapped = mapError(error);
   const context = `${req.method} ${req.originalUrl}`;
 
-  // Operational errors are expected and stay at warn; everything else is a bug
-  // and gets a stack trace. Either way the client never sees internals.
+  
+  
   if (mapped.statusCode >= 500) {
     logger.error(`${context} failed: ${error.message}`, { stack: error.stack });
   } else if (!(error instanceof AppError)) {

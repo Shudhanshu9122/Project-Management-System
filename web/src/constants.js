@@ -1,6 +1,6 @@
-// These values are the same strings the API validates against. They are
-// duplicated here rather than shared over the network because they change with
-// the schema, which is a backend concern.
+
+
+
 
 export const PROJECT_STATUSES = ['Not Started', 'In Progress', 'Completed'];
 export const TASK_STATUSES = ['Pending', 'In Progress', 'Completed'];
@@ -21,7 +21,7 @@ export const TASK_SORTS = [
   { value: 'status', label: 'Status' },
 ];
 
-// Colour is never the only signal: every badge also renders its text.
+
 export const PROJECT_STATUS_VARIANT = {
   'Not Started': 'neutral',
   'In Progress': 'info',
@@ -40,7 +40,7 @@ export const PRIORITY_VARIANT = {
   High: 'danger',
 };
 
-// Mid-tone values chosen to stay legible on both the light and dark surface.
+
 export const CHART_COLORS = {
   Pending: '#d0a13a',
   'In Progress': '#5b7fe0',

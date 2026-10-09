@@ -4,11 +4,7 @@ const RADIUS = 62;
 const STROKE = 18;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
-/**
- * Pure SVG donut. Deliberately not a charting library: three segments do not
- * justify the bundle size, and this keeps the styling in the same design tokens
- * as the rest of the app.
- */
+
 export function DonutChart({ segments, total, caption }) {
   const visible = segments.filter((segment) => segment.value > 0);
   let offset = 0;

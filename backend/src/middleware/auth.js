@@ -20,8 +20,8 @@ const requireAuth = asyncHandler(async (req, _res, next) => {
 
   const payload = verifyToken(token);
 
-  // A logged-out token is still cryptographically valid, so the revocation list
-  // is checked on every request rather than only at login.
+  
+  
   const { rows } = await db.query('SELECT 1 FROM revoked_tokens WHERE jti = $1', [payload.jti]);
   if (rows.length > 0) {
     throw AppError.unauthorized('TOKEN_REVOKED', 'This session has been logged out. Please log in again.');

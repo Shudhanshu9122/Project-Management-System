@@ -40,11 +40,11 @@ export function Tasks() {
     [debouncedSearch, status, priority, sort, page]
   );
 
-  // The task form needs the project list to choose a project and to allow moves.
+  
   const projects = useFetch((signal) => api.get('/projects?limit=100&sort=name', { signal }), []);
 
   async function patchTask(task, changes) {
-    // Optimistic update
+    
     const previousData = data;
     if (data) {
       setData({
@@ -55,9 +55,9 @@ export function Tasks() {
 
     try {
       await api.put(`/tasks/${task.id}`, changes);
-      reload(); // Sync with server in the background
+      reload(); 
     } catch (patchError) {
-      if (previousData) setData(previousData); // Rollback on error
+      if (previousData) setData(previousData); 
       toast.error('Could not update the task', patchError.message);
     }
   }

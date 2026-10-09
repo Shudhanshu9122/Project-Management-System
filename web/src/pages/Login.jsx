@@ -50,8 +50,8 @@ export function Login() {
       toast.success('Welcome back', account.fullName);
       navigate('/', { replace: true });
     } catch (error) {
-      // A wrong password belongs under the form, not on a field, because the
-      // API deliberately does not say which half was wrong.
+      
+      
       setFormError(error.message || 'Could not sign in.');
     } finally {
       setSubmitting(false);

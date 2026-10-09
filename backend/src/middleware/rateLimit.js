@@ -10,9 +10,9 @@ function tooManyRequests(_req, res) {
   });
 }
 
-// express-rate-limit v7 refuses to run with a blanket `trust proxy: true` unless
-// the check is disabled. The value comes from TRUST_PROXY, which is set by
-// whoever deploys the service, so the warning is acknowledged rather than remade.
+
+
+
 const shared = {
   handler: tooManyRequests,
   standardHeaders: 'draft-7',
@@ -26,8 +26,8 @@ const apiLimiter = rateLimit({
   limit: env.rateLimit.max,
 });
 
-// Credential endpoints get their own, much tighter budget so password guessing
-// is not limited only by the general API ceiling.
+
+
 const authLimiter = rateLimit({
   ...shared,
   windowMs: env.rateLimit.windowMs,

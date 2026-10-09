@@ -6,13 +6,7 @@ function fieldPath(path) {
   return path.length > 0 ? path.join('.') : '_root';
 }
 
-/**
- * Validates the requested parts of a request against zod schemas and replaces
- * them with the parsed result, so controllers receive coerced values.
- *
- * Express defines `query` as a getter on the request prototype, which a plain
- * assignment cannot shadow - defineProperty is used instead.
- */
+
 function validate(schemas) {
   return (req, res, next) => {
     const details = [];

@@ -29,7 +29,7 @@ export function Projects() {
   const toast = useToast();
   const debouncedSearch = useDebounce(search, 300);
 
-  // Any filter change invalidates the current page number.
+  
   useEffect(() => {
     setPage(1);
   }, [debouncedSearch, status, sort]);
@@ -46,7 +46,7 @@ export function Projects() {
       await api.delete(`/projects/${pendingDelete.id}`);
       toast.success('Project deleted', pendingDelete.name);
 
-      // Stepping back avoids landing on a page that no longer exists.
+      
       if (data && data.data.length === 1 && page > 1) setPage((current) => current - 1);
       else reload();
 

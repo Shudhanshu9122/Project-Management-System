@@ -24,7 +24,7 @@ export function Layout() {
     localStorage.setItem(COLLAPSE_KEY, String(collapsed));
   }, [collapsed]);
 
-  // Navigating from the mobile drawer must leave the drawer behind.
+  
   useEffect(() => {
     setDrawerOpen(false);
   }, [location.pathname]);
@@ -62,7 +62,7 @@ export function Layout() {
             <Menu size={20} aria-hidden="true" />
           </button>
 
-          {/* Location chrome, not the page heading: each page owns its own h1. */}
+          {}
           <span className="topbar__title">{titleFor(location.pathname)}</span>
           <UserMenu />
         </header>

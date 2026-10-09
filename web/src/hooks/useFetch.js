@@ -1,12 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-/**
- * Runs `loader` whenever `deps` change, cancelling the in-flight request when a
- * new one starts or the component unmounts.
- *
- * The loader is kept in a ref so an inline arrow function does not restart the
- * request on every render; only `deps` decide when to fetch.
- */
+
 export function useFetch(loader, deps = []) {
   const [state, setState] = useState({ data: null, error: null, loading: true });
   const [attempt, setAttempt] = useState(0);
@@ -32,7 +26,7 @@ export function useFetch(loader, deps = []) {
       active = false;
       controller.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [...deps, attempt]);
 
   const reload = useCallback(() => setAttempt((value) => value + 1), []);

@@ -5,7 +5,7 @@ class AppError extends Error {
     this.statusCode = statusCode;
     this.code = code;
     this.details = details;
-    // Marks errors the handler may show to the client as-is.
+    
     this.isOperational = true;
   }
 

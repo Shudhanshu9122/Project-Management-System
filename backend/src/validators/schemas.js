@@ -11,8 +11,8 @@ const TASK_SORTS = ['createdAt', 'name', 'dueDate', 'priority', 'status'];
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_PAGE_SIZE = 100;
 
-// A cleared filter in the UI arrives as `?status=`, which means "not set"
-// rather than "match the empty string".
+
+
 function blankToUndefined(value) {
   return typeof value === 'string' && value.trim() === '' ? undefined : value;
 }
@@ -28,16 +28,13 @@ function textField(label, max) {
 function isRealCalendarDate(value) {
   const [year, month, day] = value.split('-').map(Number);
   const date = new Date(Date.UTC(year, month - 1, day));
-  // Round-tripping through Date catches 2025-02-31 without accepting 2025-03-03.
+  
   return (
     date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day
   );
 }
 
-/**
- * A calendar date in YYYY-MM-DD form, or null/'' to clear it. Omitting the field
- * entirely is allowed so PATCH-style updates can leave it untouched.
- */
+
 function dateField(label) {
   return z
     .preprocess(
@@ -99,8 +96,8 @@ function positiveIntField(label, { max, defaultValue }) {
   );
 }
 
-// Lowercased here as well as in the query, so a mixed-case email cannot create a
-// second account for the same person.
+
+
 const emailField = z
   .string({ required_error: 'Email is required.' })
   .trim()
@@ -109,8 +106,8 @@ const emailField = z
   .toLowerCase()
   .email('Enter a valid email address.');
 
-// bcrypt silently ignores everything past 72 bytes, so the limit is enforced
-// here rather than letting two different passwords hash to the same value.
+
+
 const passwordField = z
   .string({ required_error: 'Password is required.' })
   .min(8, 'Password must be at least 8 characters.')
@@ -118,8 +115,8 @@ const passwordField = z
   .regex(/[A-Za-z]/, 'Password must contain at least one letter.')
   .regex(/\d/, 'Password must contain at least one number.');
 
-// Login only checks presence: telling a user their existing password is too weak
-// would leak shape information and cannot be acted on from this screen.
+
+
 const loginPasswordField = z
   .string({ required_error: 'Password is required.' })
   .min(1, 'Password is required.')
@@ -139,9 +136,9 @@ const projectBase = z
   })
   .strict();
 
-// Reported against endDate so the form can render the message under that input.
-// Only fires when both values are present; the controller compares against the
-// stored row when an update supplies just one of them.
+
+
+
 const withDateOrder = (schema) =>
   schema.refine(
     (value) =>
@@ -177,8 +174,8 @@ const taskBody = z
   })
   .strict();
 
-// projectId stays optional here: it is only required when moving a task between
-// projects, which the controller checks.
+
+
 const taskUpdateBody = taskBody
   .partial()
   .strict()
@@ -208,8 +205,8 @@ const tasksQuery = listQuery(TASK_SORTS, {
   priority: optionalEnum('Priority', TASK_PRIORITIES),
 });
 
-// .strict() on every body: an unrecognised key is a client bug, and silently
-// dropping it would hide the mistake (and block mass-assignment attempts).
+
+
 const authBody = z
   .object({
     fullName: textField('Full name', 120),

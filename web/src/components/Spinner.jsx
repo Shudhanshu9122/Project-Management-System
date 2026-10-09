@@ -9,7 +9,7 @@ export function Spinner({ size = 18, label = 'Loading' }) {
   );
 }
 
-/** Full-height centred spinner used while a whole page is loading. */
+
 export function PageSpinner({ label = 'Loading' }) {
   return (
     <div style={{ display: 'grid', placeItems: 'center', padding: '80px 0' }}>

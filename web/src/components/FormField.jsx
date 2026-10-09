@@ -1,9 +1,6 @@
 import { AlertCircle } from 'lucide-react';
 
-/**
- * Renders a label, the control and an error message, wiring up the ids and
- * aria attributes so a screen reader announces the error with the input.
- */
+
 export function FormField({ id, label, error, hint, required, children }) {
   const errorId = `${id}-error`;
   const hintId = `${id}-hint`;

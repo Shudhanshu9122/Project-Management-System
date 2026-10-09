@@ -6,7 +6,7 @@ const ThemeContext = createContext(null);
 function resolveInitialTheme() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === 'light' || stored === 'dark') return stored;
-  // No stored choice yet: follow the operating system.
+  
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 

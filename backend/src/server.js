@@ -14,8 +14,8 @@ async function shutdown(signal) {
   shuttingDown = true;
   logger.info(`${signal} received, shutting down`);
 
-  // Stop accepting connections, then release the pool so Postgres is not left
-  // holding sessions for a process that no longer exists.
+  
+  
   server.close(async (error) => {
     if (error) {
       logger.error(`Failed to close HTTP server: ${error.message}`);
@@ -32,7 +32,7 @@ async function shutdown(signal) {
     process.exit(process.exitCode || 0);
   });
 
-  // A hung keep-alive connection must not keep the container alive.
+  
   setTimeout(() => {
     logger.error('Forced shutdown after timeout');
     process.exit(1);

@@ -1,4 +1,4 @@
-/* ---------- App shell ---------- */
+
 
 .shell {
   display: flex;
@@ -63,7 +63,7 @@
   gap: 2px;
 }
 
-/* Small monospaced section labels, the editorial counterpoint to the serif. */
+
 .sidebar__section-label {
   margin: var(--space-5) 0 var(--space-2);
   padding: 0 var(--space-2);
@@ -138,7 +138,7 @@
   color: var(--text-subtle);
 }
 
-/* Project shortcuts under "On the desk" */
+
 .sidebar__project {
   display: flex;
   align-items: center;
@@ -221,7 +221,7 @@
   display: none;
 }
 
-/* ---------- Main column ---------- */
+
 
 .main {
   flex: 1;
@@ -300,7 +300,7 @@
   cursor: pointer;
 }
 
-/* ---------- Page furniture ---------- */
+
 
 .page {
   display: flex;
@@ -356,7 +356,7 @@
   min-width: 0;
 }
 
-/* ---------- Auth split layout ---------- */
+
 
 .auth {
   display: grid;

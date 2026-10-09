@@ -14,8 +14,8 @@ const TASK_COLUMNS = `t.id,
 
 const TASK_SELECT = `${TASK_COLUMNS}, p.name AS "projectName"`;
 
-// Alphabetical order would sort High/Medium/Low and Pending/In Progress/Completed
-// by spelling, which is not the order the UI shows them in.
+
+
 const TASK_LIST_SORTS = {
   createdAt: 't.created_at',
   name: 't.name',
@@ -33,8 +33,8 @@ const TASK_WRITE_COLUMNS = [
   ['dueDate', 'due_date'],
 ];
 
-// Ownership lives on the project, so every task lookup joins through it. A task
-// belonging to someone else is simply not selected.
+
+
 async function findOwnedTask(taskId, ownerId) {
   const { rows } = await db.query(
     `SELECT ${TASK_SELECT}
@@ -119,7 +119,7 @@ const create = asyncHandler(async (req, res) => {
   const { projectId, name, description = null, priority = 'Medium', status = 'Pending', dueDate = null } =
     req.body;
 
-  // Checked before insert so a task cannot be parked in someone else's project.
+  
   await assertProjectOwned(projectId, req.user.id);
 
   const { rows } = await db.query(
@@ -148,7 +148,7 @@ const update = asyncHandler(async (req, res) => {
     throw AppError.notFound('task');
   }
 
-  // Moving a task is only allowed into a project the caller owns.
+  
   if (req.body.projectId !== undefined) {
     await assertProjectOwned(req.body.projectId, req.user.id);
   }

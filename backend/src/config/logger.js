@@ -17,11 +17,11 @@ const logger = winston.createLogger({
         )
   ),
   transports: [new winston.transports.Console()],
-  // Tests assert on behaviour, not on log volume.
+  
   silent: env.isTest,
 });
 
-// morgan writes request lines through winston so everything lands in one stream.
+
 logger.stream = { write: (message) => logger.info(message.trim()) };
 
 module.exports = logger;

@@ -68,7 +68,7 @@ export function TaskForm({ open, task, projects, defaultProjectId = '', onClose,
     setSaving(true);
     setFormError(null);
 
-    // projectId is included on edit so a task can be moved between projects.
+    
     const payload = {
       projectId: values.projectId,
       name: values.name.trim(),
